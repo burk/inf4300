@@ -5,6 +5,13 @@ __pycache__/
 # C extensions
 *.so
 
+*.pyg
+*.swp
+*.aux
+*.pdf
+*.out
+*.log
+
 # Distribution / packaging
 .Python
 env/
