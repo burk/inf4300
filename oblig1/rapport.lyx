@@ -1,0 +1,246 @@
+#LyX 2.1 created this file. For more info see http://www.lyx.org/
+\lyxformat 474
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_math auto
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_package amsmath 1
+\use_package amssymb 1
+\use_package cancel 1
+\use_package esint 1
+\use_package mathdots 1
+\use_package mathtools 1
+\use_package mhchem 1
+\use_package stackrel 1
+\use_package stmaryrd 1
+\use_package undertilde 1
+\cite_engine basic
+\cite_engine_type default
+\biblio_style plain
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\justification true
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+INF4300 – Mandatory exercise – Part 1
+\end_layout
+
+\begin_layout Author
+Bjørn Rustad
+\end_layout
+
+\begin_layout Section
+Analyzing the textures
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mosaic1.png
+	lyxscale 50
+	width 40text%
+
+\end_inset
+
+
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mosaic 1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Graphics
+	filename mosaic2.png
+	lyxscale 50
+	width 40text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Mosaic 2
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption Standard
+
+\begin_layout Plain Layout
+Initial unprocessed mosaic images
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset CommandInset label
+LatexCommand label
+name "fig:raw_mosaic"
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+The textures to be analyzed are shown in Figure 
+\begin_inset CommandInset ref
+LatexCommand ref
+reference "fig:raw_mosaic"
+
+\end_inset
+
+.
+ 
+\end_layout
+
+\begin_layout Subsection
+Mosaic 1
+\end_layout
+
+\begin_layout Standard
+We start by looking at mosaic 1, which shows in the upper left corner an
+ relief-like texture with high contrast, no very strong directional dependence,
+ and a texel size of around 20x20 pixels.
+ In the upper left we see a more grid-like texture, where the grid is made
+ of hair-like structures with varying intensity.
+ I estimate the texel size to be in the order of 20x20 pixels also here.
+ In the bottom left we see a very different texture made of 
+\begin_inset Quotes eld
+\end_inset
+
+sticks
+\begin_inset Quotes erd
+\end_inset
+
+ laying mostly in the same direction, and with quite high contrast.
+ The texel size is harder to estimate, but it is larger than in the other
+ textures, about 40x40.
+ In the bottom right we have a very fine texture with no apparent direction,
+ a small texel size and not as high contrast as the upper left one.
+\end_layout
+
+\begin_layout Subsection
+Mosaic 2
+\end_layout
+
+\begin_layout Standard
+Now in mosaic 2 we have in the upper left a fabric-like regular structure.
+ The texture direction varies, but in the vertical and horizontal direction,
+ the texture should be pretty uniform.
+ It has a small texel size of about 20x20.
+ The upper right texture is a very homogenous braid-like texture with slightly
+ larger texel size and a uniform texture direction.
+ In the bottom left we have a very dark, homogenous, bamboo-like texture
+ with a uniform texture direction and a texel size of about 20x20.
+ Finally, in the bottom right we have a homogenous but irregular texture
+ of high contrast and no direction.
+ It also has a texel size of about 20x20.
+\end_layout
+
+\begin_layout Section
+Visualizing GLCM matrices
+\end_layout
+
+\begin_layout Standard
+Before analyzing the images, I perform a simple histogram equalization.
+ It visually seems like it enhances the contrast, and also removes some
+ of the spatially large variations in the background intensity.
+ 
+\end_layout
+
+\end_body
+\end_document
