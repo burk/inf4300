@@ -51,24 +51,28 @@ The textures to be analyzed are shown in Figure \ref{fig:raw_mosaic}.
 
 We start by looking at mosaic 1, which shows in the upper left corner an
 relief-like texture with high contrast, no very strong directional
-dependence, and a texel size of around 20x20 pixels. In the upper left
-we see a more grid-like texture, where the grid is made of hair-like
+dependence, and a texel size of around 20x20 pixels. In the upper right
+we see a more grid-like texture, where the grid is filled with hair-like
 structures with varying intensity. I estimate the texel size to be in
-the order of 20x20 pixels also here. In the bottom left we see a very
-different texture made of “sticks” laying mostly in the same direction,
-and with quite high contrast. The texel size is harder to estimate, but
+the order of 20x20 pixels also here, but a difficulty is the varying
+intensity in the texture. In the bottom left we see a very
+different texture made of ``sticks'' laying mostly in the same direction,
+and with quite high contrast. The texel size is harder to estimate as
+some parts are more sparse on ``sticks'' than others, but
 it is larger than in the other textures, about 40x40. In the bottom
-right we have a very fine texture with no apparent direction, a small
-texel size and not as high contrast as the upper left one.
+right we have a very fine texture with no apparent direction, a smaller
+texel size it has a higher frequency than the other textures.
 
 \subsection{Mosaic 2}
 
 Now in mosaic 2 we have in the upper left a fabric-like regular
-structure. The texture direction varies, but in the vertical and
-horizontal direction, the texture should be pretty uniform. It has a
-small texel size of about 20x20. The upper right texture is a very
+texture. The texture direction varies, but in the vertical and
+horizontal direction the texture appears pretty uniform. Ignoring the
+direction changes it has a
+small texel size of about 20x20 or less. The upper right texture is a very
 homogenous braid-like texture with slightly larger texel size and a
-uniform texture direction. In the bottom left we have a very dark,
+uniform texture direction. The variance in grey level seems smaller than
+the other textures. In the bottom left we have a very dark,
 homogenous, bamboo-like texture with a uniform texture direction and a
 texel size of about 20x20. Finally, in the bottom right we have a
 homogenous but irregular texture of high contrast and no direction. It
@@ -78,7 +82,9 @@ also has a texel size of about 20x20.
 
 Before analyzing the images, I perform a simple histogram equalization.
 It visually seems like it enhances the contrast, and also removes some
-of the spatially large variations in the background intensity. 
+of the spatially large variations in the background intensity. It will
+also help us make more use of all the different levels in the GLCM
+analysis.
 
 Then we experiment with some different values for the GLCM matrices, and
 visualize them for each of the different eight textures. Most of their
@@ -96,8 +102,7 @@ The results for $(dx, dy) = (3, 0)$ are shown in Figure
 \ref{fig:glcm6_3_0}. We see already that the upper two, and bottom left
 textures of both mosaics are kind of discernible, while the bottom right
 GLCM matrix is kind of similar to the upper left matrix in both mosaics.
-Looking back at the mosaics, this is not so strange, but we should be
-able to separate them in some way.
+Looking back at the mosaics, this is not so strange.
 
 \begin{figure}
     \centering
@@ -152,7 +157,7 @@ This is when I realize the values 0 and 3 for $dx$ and $dy$ are maybe
 too small, and will be more affected by noise and small ``random''
 variations than the actual texture appearance itself. Thus we try $(dx,
 dy) = (10, 0)$, and to possibly increase the ``resolution'' GLCM matrix,
-we increase the number of levels $G = 10$. Figure \ref{fig:glcm10_10_0}
+we increase the number of levels $G = 10$. Figure~\ref{fig:glcm10_10_0}
 shows the resulting matrices.
 
 \begin{figure}
@@ -187,7 +192,7 @@ From the three GLCM features listed in the assignment, I would think
 cluster shade is the one giving the most valuable information looking at
 these GLCM matrices. The cluster shade weights the matrix with a
 gradient going from negative values in the upper left corner to positive
-values in the lower left corner, and thus measures how the matrix is
+values in the lower right corner, and thus measures how the matrix is
 balanced along the diagonal. Looking at the different GLCM matrices,
 this could help us differentiate between all of the four textures in
 each mosaic except maybe the top left from the bottom right. As the top
@@ -205,17 +210,17 @@ parameters $G = 10$, $(dx, dy) = (10, 0)$ in Figure
 
 To be able to segment the textures, we calculate the GLCM matrix and
 from it the GLCM features on a window that we slide over the two
-mosaics. The windows are centered around a pixel, and thus we get a
-feature value in each pixel position except for a border around the edge
-of the image. 
+mosaics. We choose odd window sizes so that the windows are centered
+around a pixel, and thus we get a feature value in each pixel position
+except for a border around the edge of the image. 
 
 We calculate the GLCM homogeneity, intertia, and cluster shade features,
 and they are implemented in Appendix \ref{app:code}.
 
 For the GLCM matrices with $G = 6$ and $(dx, dy) = \{(3, 0), (0, 3)\}$,
 shown in Figure \ref{fig:glcm6_3_0} and \ref{fig:glcm6_0_3} we select a
-feature size of 31-by-31. The initial analysis indicated that this was
-about the size of most of the texels. For the GLCM with $G = 10$ and
+feature size of 31-by-31. The initial analysis indicated that this is a
+bit more than the size of most of the texels. For the GLCM with $G = 10$ and
 $(dx, dy) = (10, 0)$ visualized in Figure \ref{fig:glcm10_10_0}, we
 select a larger window size of 41-by-41, as this GLCM was intended to be
 better at separating the very similar textures.
@@ -524,8 +529,8 @@ the size of the noise seems to big to tackle with simple methods. Better
 GLCM parameters and/or other features are probably needed to properly
 segment this region. In hindsight, the choice of $dx$ and $dy$ only in
 $\{0, 3, 10\}$ was probably a bit too limiting, as for example the
-bottom right and top left texture differ a little bit in the size of the
-elements making up the texture.
+bottom right and top left texture differ a little bit in the frequency
+of the smallest variations.
 
 The segmentation of the bottom left looks OK with noise of small spatial
 size, both inside and outside the region.
