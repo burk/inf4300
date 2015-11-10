@@ -38,7 +38,9 @@ where the top right and bottom left texture are very regular and
 directional, while the other two are more grainy and randomly directed.
 
 GLCM matrices are given for the four different textures, for four sets
-of parameters $(dx, dy) = \{(0, -1), (1, 0), (-1, -1), (1, -1)\}$. The
+of parameters $(dx, dy) = \{(0, 1), (1, 0), (1, -1), (-1, 1)\}$. Note
+that I have been working on the second revision of the GLCM data, as I
+was almost done with the project when the third revision was posted. The
 number of levels is always $G = 16$. This is what we have to work with,
 but in my opinion it seems strange to only have step sizes in $\{-1, 0,
 1\}$ when some of the textures have obvious structures of larger sizes
@@ -242,7 +244,8 @@ I train the implemented classifier on the training set, with the classes
 as described in the \texttt{training\_mask} file, and the 10 different
 features as selected previously. Note that I pad the training and
 testing images by reflecting the image around the border such that I
-obtain GLCM feature images of the same size as the original images.
+obtain GLCM feature images of the same size as the original images. I
+also standardize the features to have zero mean and unit variance.
 
 I obtain a training accuracy of 100\% meaning that the confusion matrix
 is the identity matrix, and not very interesting to inspect. The
@@ -296,7 +299,9 @@ question is now whether we have overfitted to the training set.
     \label{fig:test3}
 \end{figure}
 
-I test the classifier on the two testing images provided. The results
+I test the classifier on the two testing images provided. The features
+are calculated as for the training set, and standardized using the mean
+and standard deviation from the \emph{training} set. The results
 are visualized in Figures~\ref{fig:test2} and \ref{fig:test3} with one
 color representing each class. It is clear that the classifier performs
 pretty well on test image 2, while not so great on test image 3.
@@ -389,8 +394,11 @@ correctly.
 Many improvements are possible, but my hypothesis is that more
 adaptation of the GLCM $dx$ and $dy$ parameters, as well as some initial
 pre-processing and normalization of the training and testing images
-would be a good place to start. Or possibly using completely different
-features.
+would be a good place to start. One point worth experimenting with is
+how the features are standardized. I now standardize the test features
+using the training mean and standard deviation, while we could also have
+used the testing mean and standard deviation. This would break down if
+you only wanted to classify a few pixels though.
 
 \appendix
 
