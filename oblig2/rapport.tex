@@ -9,7 +9,7 @@
 \usepackage{polyglossia}
 \setmainlanguage[variant=american]{english}
 
-\usepackage{hyperref}
+\usepackage[hidelinks]{hyperref}
 \usepackage{subcaption}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -339,13 +339,15 @@ pretty well on test image 2, while not so great on test image 3.
 Table \ref{tab:conf2} shows the confusion matrix of test mosaic 2
 (Figure~\ref{fig:test2}). We see that the overall performance is good.
 We have the highest confusion for true class 2 pixels that are predicted
-to be of class 1.
+to be of class 1. In total we predict 96.5\% of the pixels correctly in
+test mosaic 2.
 
 Table~\ref{tab:conf3} shows the confusion matrix of test mosaic 3
 (Figure~\ref{fig:test3}). There is more confusion here. Over half of the
 true class 2 pixels and a lot of the true class 4 pixels are confused
 to be of class 1, resulting in that class 1 contains twice as many
-pixels as it should.
+pixels as it should. In total we predict 72.7\% of the pixels correctly
+in test mosaic 3.
 
 Looking at the mosaics, it appears that the shadings of the two bottom
 textures are very different in the two test images. If we are only
