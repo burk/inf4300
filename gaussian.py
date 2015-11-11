@@ -66,6 +66,7 @@ class GaussianClassifier(object):
     def predict(self, X):
         Y = np.zeros((X.shape[0]))
 
+        # Precalculate terms not dependent on the feature x
         w = {}
         w0 = {}
         for lab in self.labels:
@@ -88,8 +89,6 @@ class GaussianClassifier(object):
                 prob[cl] = x.dot(-0.5 * \
                         np.linalg.solve(self.sigma[cl], x)) + \
                         w[cl].dot(x) + w0[cl]
-                if np.isnan(prob[cl]) and r % 1000 == 0:
-                    prob[cl] = -np.inf
 
             # Get the class with the highest discriminant
             Y[r] = max(prob.iteritems(), key=operator.itemgetter(1))[0]
